@@ -1,5 +1,6 @@
 import prisma from "../config/prisma.js";
-import { encodeId } from "../utils/base62.ts";
+import { encodeId } from "../utils/base62.ts"; 
+import { BASE_URL } from "../config/env.js";
 
 export const createUrl = async (req, res) => {
     const { long_url } = req.body ?? {};
@@ -27,10 +28,13 @@ export const createUrl = async (req, res) => {
                 data: { short_code: code }
             });
         });
+        const shortURL = `${BASE_URL}/${newURL.short_code}`; 
 
-        return res.status(201).json({ short_code: `${newURL.short_code}` });
+        return res.status(201).json({ shortURL: shortURL }); 
+
     } catch (error) {
         console.error('Error creating URL:', error);
         return res.status(500).json({ error: 'Internal Server Error', details: error?.message });
     }
-};
+}; 
+ 
