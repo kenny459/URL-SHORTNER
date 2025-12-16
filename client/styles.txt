@@ -1,0 +1,44 @@
+Backgrounds
+bg-slate-950: The main body background and input field backgrounds.
+bg-slate-900: Used with opacity (/30, /50, /60) for glassmorphism cards, history items, and focus ring offsets.
+bg-slate-800: Secondary button backgrounds and tag badges. 
+
+Borders & Separators
+border-slate-800: Card borders and the footer top border.
+border-slate-700: Input field borders and hover states for secondary buttons. 
+
+Typography
+text-slate-100: User input text (high readability).
+text-slate-200: Primary headings and main text.
+text-slate-400: Subtitles, ghost button text, and click count tags.
+text-slate-500: Secondary descriptions, icons, and placeholder text (text-slate-600 is also used for placeholders). 
+
+Primary Accents (Cyan & Blue)
+Used for branding, gradients, and calls to action.
+Cyan
+cyan-500: Start of the primary button gradient, focus rings, shadows, and background glow effects.
+cyan-400: Text for shortened links, icons in the "Super Fast" feature, and hover states for gradients. 
+
+Blue
+blue-600: End of the primary button gradient (to-blue-600) and background glow blobs.
+blue-500: Used in the hover state of the primary gradient. 
+
+Functional & Feedback Colors
+Used to communicate state (Errors, Success, Features).
+Red (Destructive/Error)
+border-red-500/50 & focus:ring-red-500/50: Input field error state.
+text-red-400: Error message text and delete button hover icon color. 
+
+Purple (Feature)
+bg-purple-500/10 & text-purple-400: Used specifically for the "Secure" feature icon.
+Emerald (Success/Feature)
+bg-emerald-500/10 & text-emerald-400: Used specifically for the "Analytics" feature icon. 
+
+White
+text-white: Used for text inside the primary gradient button and the loading spinner. 
+
+Custom Scrollbar (CSS)
+Defined in the <style> tag in HTML.
+#0f172a (Matches Slate 950): Scrollbar track.
+#334155 (Matches Slate 700): Scrollbar thumb.
+#475569 (Matches Slate 600): Scrollbar thumb on hover.

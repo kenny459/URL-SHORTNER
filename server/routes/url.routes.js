@@ -1,37 +1,57 @@
-import  { Router  } from "express";   
+import { Router } from "express";    
+import redisClient from "../config/redis.js";
 import prisma from "../config/prisma.js";
-import { createUrl } from "../controllers/urlControllers.js";
+import { createUrl } from "../controllers/urlControllers.js"; 
+import { validate } from "../middlewares/validateurls.js"; 
+import { createUrlSchema } from "../schemas/url.schemas.js";
 
 const router = Router();   
 
-
-router.post('/', createUrl ); 
+router.post('/', validate(createUrlSchema), createUrl); 
  
-router.get('/:code', async (req, res ) => {  
 
-const {code} = req.params; 
 
-  // 1. Find the code in the Database
-  const urlRecord = await prisma.urls.findUnique({
-    where: { short_code: code }
-  });
-
-  // 2. If not found, show 404
-  if (!urlRecord) {
-    return res.status(404).send('Short URL not found');
+router.get('/:code', async (req, res) => {  
+  const { code } = req.params;
+  
+  try {
+    // Always increment click count and retrieve long_url
+    let longUrl;
+    try {
+      const updateResult = await prisma.urls.update({
+        where: { short_code: code },
+        data: { click_count: { increment: 1 } },
+        select: { long_url: true }
+      });
+      longUrl = updateResult.long_url;
+    } catch (error) {
+      if (error.code === 'P2025') {  // Record not found
+        return res.status(404).send('Short URL not found');
+      }
+      throw error;
+    }
+    
+    // Check Redis cache
+    const cachedUrl = await redisClient.get(code);
+    
+    if (cachedUrl) {
+      console.log("Cache Hit");
+      return res.redirect(cachedUrl);
+    }
+    
+    console.log('Cache Miss');
+    
+    // Cache the URL
+    await redisClient.set(code, longUrl);
+    
+    // Redirect
+    return res.redirect(longUrl);
+    
+  } catch (error) {
+    console.error('Error in redirect route:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
-
-  // 3. OPTIONAL: Increment Click Count (Analytics)
-  // We do this asynchronously so we don't slow down the user's redirect
-  prisma.urls.update({
-    where: { id: urlRecord.id },
-    data: { click_count: { increment: 1 } }
-  }).catch(err => console.error("Error updating stats", err));
-
-  // 4. Redirect the user to the original Long URL
-  return res.redirect(urlRecord.long_url);
-})
- 
+});
 
 
-export default router; 
+export default router;
