@@ -5,7 +5,7 @@ const base = characters.length; // 62
  * Encodes a database integer ID into a short string.
  * Example: 1000 -> "g8"
  */
-export const encodeId = (id: number): string => {
+export const encodeId = (id) => {
   if (id === 0) return characters[0];
   
   let encoded = '';
@@ -30,7 +30,7 @@ export const encodeId = (id: number): string => {
  * Example: "g8" -> 1000
  * (Useful if you want to lookup by ID instead of string column)
  */
-export const decodeId = (shortCode: string): number => {
+export const decodeId = (shortCode) => {
   let id = 0;
   
   for (let i = 0; i < shortCode.length; i++) {
