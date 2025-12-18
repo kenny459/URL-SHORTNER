@@ -3,6 +3,9 @@ import React, {useState} from 'react'
 import z from 'zod' 
 import HistoryItem from './historyItem'
 
+
+
+
 const Input = () => { 
      const [error, setError] = useState(null as string | null)  
      const [longUrl, setLongUrl] = useState("")     
@@ -24,7 +27,7 @@ const Input = () => {
   }  
 
   try {
-     const response =  await fetch('http://localhost:3000/api/v1/urls/', { 
+     const response =  await fetch(import.meta.env.VITE_API_BASE_URL, { 
         method: 'POST', 
         headers :{ 
             'Content-Type': 'application/json'
