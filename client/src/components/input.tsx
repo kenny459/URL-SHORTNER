@@ -36,7 +36,8 @@ const Input = () => {
         throw new Error("Failed to shorten URL");
      }
      const data =   await response.json(); 
-      setUrlData(prev => [data, ...prev]);
+      setUrlData(prev => [data, ...prev]); 
+      setError(null)
      console.log(data)  
      console.log(urlData)
 
@@ -71,7 +72,7 @@ const Input = () => {
               </div>  
                  <div>
                {error && (
-                  <p className="absolute -bottom-6 left-0 text-xs font-medium text-red-400 animate-fade-in">
+                  <p className=" mt-2 text-xs font-medium text-red-400 animate-fade-in">
                     {error}
                   </p>
                 )} 

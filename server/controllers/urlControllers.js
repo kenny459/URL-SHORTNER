@@ -25,7 +25,7 @@ export const createUrl = async (req, res) => {
         const newURL = await prisma.$transaction(async (tx) => {
             const created = await tx.urls.create({
                 data: { 
-                    id: BigInt(0),
+                    
                     long_url,
                     short_code: '' ,  
                     click_count: 0
