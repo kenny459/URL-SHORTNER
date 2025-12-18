@@ -1,5 +1,5 @@
 import prisma from "../config/prisma.js";
-import { encodeId } from "../utils/base62.ts"; 
+import { encodeId } from "../utils/base62.js"; 
 import { BASE_URL } from "../config/env.js"; 
 import redisClient from "../config/redis.js";
 
