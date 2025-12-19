@@ -6,8 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js" , 
-     
+    "dev": "nodemon index.js",
     "postinstall": "prisma generate"
   },
   "author": "kennedy",
@@ -22,6 +21,6 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
-    "prisma": "^6.19.0"
+    "prisma": "6.19"
   }
 }
