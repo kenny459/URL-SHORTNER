@@ -14,5 +14,5 @@ FROM nginx:alpine
 # Expose the default HTTP port 80 in the container
 EXPOSE 80
 # Copy the built files from the 'build' stage to Nginx's public serving directory
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 # Nginx serves files by default, no specific command needed.
