@@ -4,7 +4,8 @@
   "type": "module",
   "description": "server for url shortner application",
   "main": "index.js",
-  "scripts": {
+  "scripts": { 
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "preinstall": "npm install redis",
