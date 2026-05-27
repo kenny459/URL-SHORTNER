@@ -22,9 +22,14 @@ router.get('/:code', async (req, res) => {
         where: { short_code: code },
         data: { click_count: { increment: 1 } },
         select: { long_url: true }
-      }); 
+      });  
        
-      broadcast(code, Number(updateResult.click_count)); 
+      const clickCount = Number(updateResult.click_count);
+console.log('Broadcasting:', code, clickCount);
+broadcast(code, clickCount);
+
+       
+     
 
       longUrl = updateResult.long_url;
     } catch (error) {
