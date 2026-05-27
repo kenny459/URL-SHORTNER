@@ -23,7 +23,7 @@ const clients = new Map();
     export const broadcast = (code, clickCount) => { 
         if (!clients.has(code)) return; 
          
-        const message = `data: ${JSON.stringify(Number(clickCount))}\n\n`; 
+        const message = `data: ${JSON.stringify({clickCount: Number(clickCount)})}\n\n`; 
          
         clients.get(code).forEach(res => res.write(message));
 
