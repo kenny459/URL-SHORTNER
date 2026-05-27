@@ -21,10 +21,12 @@ router.get('/:code', async (req, res) => {
       const updateResult = await prisma.urls.update({
         where: { short_code: code },
         data: { click_count: { increment: 1 } },
-        select: { long_url: true }
+        select: { long_url: true , 
+click_count: true
+        }
       });  
        
-      const clickCount = Number(updateResult.click_count.toString());
+    const clickCount = Number(updateResult.click_count.toString());
 console.log('Broadcasting:', code, clickCount);
 broadcast(code, clickCount);
 
