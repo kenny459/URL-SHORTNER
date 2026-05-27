@@ -24,7 +24,7 @@ router.get('/:code', async (req, res) => {
         select: { long_url: true }
       });  
        
-      const clickCount = Number(updateResult.click_count);
+      const clickCount = Number(updateResult.click_count.toString());
 console.log('Broadcasting:', code, clickCount);
 broadcast(code, clickCount);
 

@@ -3,7 +3,11 @@ import express from 'express'
 import { PORT } from './config/env.js';  
 import cors from 'cors';
 
-import urlRouter from './routes/url.routes.js';
+import urlRouter from './routes/url.routes.js'; 
+ 
+BigInt.prototype.toJSON = function() {
+  return Number(this);
+};
  
 const app = express();  
 app.use(cors({ 

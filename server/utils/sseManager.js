@@ -22,8 +22,9 @@ const clients = new Map();
      
     export const broadcast = (code, clickCount) => { 
         if (!clients.has(code)) return; 
-         
-        const message = `data: ${JSON.stringify({clickCount: Number(clickCount)})}\n\n`; 
+         const safeCount = Number(String(clickCount)); // belt and braces conversion
+         console.log('Broadcasting:', code, safeCount); // verify in Render logs
+        const message = `data: ${JSON.stringify({clickCount: safeCount})}\n\n`; 
          
         clients.get(code).forEach(res => res.write(message));
 
