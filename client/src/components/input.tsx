@@ -48,7 +48,7 @@ const Input = () => {
       setError("An error occurred while shortening the URL. Please try again."); 
       console.log(error)
   }
-   
+   console.log("API URL:", import.meta.env.VITE_API_BASE_URL)
 } 
 
   return ( 

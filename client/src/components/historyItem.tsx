@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Copy, CheckIcon, TrashIcon } from 'lucide-react';
-;
+import useClickCount from '../hooks/useClickCount';
 
 interface HistoryItemProps {
   item: {
@@ -13,7 +13,10 @@ interface HistoryItemProps {
   onDelete: (id: string) => void;
 }
 const HistoryItem:React.FC<HistoryItemProps> = ({ item, onDelete }) => {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(false); 
+   
+  const shortCode = item.shortUrl.split('/').pop() || null;
+  const clickCount = useClickCount(shortCode, Number(item.clickCount));
 
   const handleCopy = async () => {
     try {
@@ -39,7 +42,7 @@ const HistoryItem:React.FC<HistoryItemProps> = ({ item, onDelete }) => {
             {item.shortUrl}
           </a>
           <span className="hidden rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-400 md:inline-block">
-            {item.clickCount} clicks
+            {clickCount} clicks
           </span>
         </div>
         <p className="truncate text-sm text-slate-500" title={item.longUrl}>
