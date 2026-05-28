@@ -41,7 +41,7 @@ const HistoryItem:React.FC<HistoryItemProps> = ({ item, onDelete }) => {
           >
             {item.shortUrl}
           </a>
-          <span className="hidden rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-400 md:inline-block">
+          <span className="rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-400">
             {clickCount} clicks
           </span>
         </div>
